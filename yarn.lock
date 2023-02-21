@@ -55,14 +55,14 @@ __metadata:
   linkType: hard
 
 "@babel/generator@npm:^7.21.0":
-  version: 7.21.0
-  resolution: "@babel/generator@npm:7.21.0"
+  version: 7.21.1
+  resolution: "@babel/generator@npm:7.21.1"
   dependencies:
     "@babel/types": ^7.21.0
     "@jridgewell/gen-mapping": ^0.3.2
     "@jridgewell/trace-mapping": ^0.3.17
     jsesc: ^2.5.1
-  checksum: 173c3284b0c9c1de19bd96b6cb1ae72b4e6482d67307238f52c05587f0bf20fa27f10ea0f67c6bf64af87a5a7cf47f7e260dcd3412cc70e47c612c2bc1dc4dfa
+  checksum: 69085a211ff91a7a608ee3f86e6fcb9cf5e724b756d792a713b0c328a671cd3e423e1ef1b12533f366baba0616caffe0a7ba9d328727eab484de5961badbef00
   languageName: node
   linkType: hard
 
@@ -200,21 +200,12 @@ __metadata:
   languageName: node
   linkType: hard
 
-"@babel/parser@npm:^7.12.7, @babel/parser@npm:^7.16.4":
+"@babel/parser@npm:^7.12.7, @babel/parser@npm:^7.16.4, @babel/parser@npm:^7.20.7, @babel/parser@npm:^7.21.0":
   version: 7.21.1
   resolution: "@babel/parser@npm:7.21.1"
   bin:
     parser: ./bin/babel-parser.js
   checksum: a564cff6dec4201a611d1f2ae5af8d7436ce80550e75a77ee72dca6b094df6188b5a4ccfae6a98c85991b56a51e6c48159e466cc5a374c7a37af706fcb5a6bc2
-  languageName: node
-  linkType: hard
-
-"@babel/parser@npm:^7.20.7, @babel/parser@npm:^7.21.0":
-  version: 7.21.0
-  resolution: "@babel/parser@npm:7.21.0"
-  bin:
-    parser: ./bin/babel-parser.js
-  checksum: ca16a2e6d4401a556791cd2f8c5f4b33a530cea615c647b3051980778c0a71462216fc8bb042bf507cb92f5e5330bd19b5332a503ae93b6c749a7cd3e7368944
   languageName: node
   linkType: hard
 
@@ -1848,9 +1839,9 @@ __metadata:
   linkType: hard
 
 "electron-to-chromium@npm:^1.4.284":
-  version: 1.4.303
-  resolution: "electron-to-chromium@npm:1.4.303"
-  checksum: f27f3cd805399d9a776e6c69f0e037faa31dbb9e7ab2340608c091918a5b6e03e6523df8855aff6f2f0ebd2723fc05a7f0a2349ec9d44ffa0a11ca14a77a9bc6
+  version: 1.4.305
+  resolution: "electron-to-chromium@npm:1.4.305"
+  checksum: 574599461f7a5283026fc55727f9396b92f4d67952d3d333fc8dbb89e3b7f1ff646588c027fe8822b13227018d870405aeda2648a7324169871bab77108c4f40
   languageName: node
   linkType: hard
 
@@ -2836,9 +2827,9 @@ __metadata:
   linkType: hard
 
 "lru-cache@npm:^7.7.1":
-  version: 7.16.1
-  resolution: "lru-cache@npm:7.16.1"
-  checksum: 64618e3ed4fd1203afedd9bbf5247921b1419f8e3100f20e58e5f04e741f8287bd7d04fefaad332411bb53b3a73445714b235de750cf5d310cba1fa23bd82795
+  version: 7.16.2
+  resolution: "lru-cache@npm:7.16.2"
+  checksum: 8246535671a1e84ff964d31c5b81b36b60253d492dd46ef799bb6c3994db2812aa7563a595ea5fba6bf2ac8264da93f41fbd0231c40e8d55b0fbef1e8f04684a
   languageName: node
   linkType: hard
 
