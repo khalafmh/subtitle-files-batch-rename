@@ -76,13 +76,19 @@ function deriveSubtitleFileName(
     episodeFileName: string,
     episodeFileExtension: string,
     subtitleFileExtension: string,
+    subtitleLanguage?: string,
 ) {
     const episodeFileNameWithoutExtension = episodeFileName.substring(0, episodeFileName.length - `.${episodeFileExtension}`.length)
-    return `${episodeFileNameWithoutExtension}.${subtitleFileExtension}`
+    return `${episodeFileNameWithoutExtension}.${!isBlank(subtitleLanguage) ? `${subtitleLanguage}.` : ""}${subtitleFileExtension}`
 }
 
 function extensionWithoutDot(s: string): string {
     return /\.?(?<value>[^.]+)/.exec(s)?.groups?.value ?? s
+}
+
+function isBlank(s: string | null | undefined): boolean {
+    if (s == null) return true
+    return /^\s*$/.test(s)
 }
 
 function App() {
@@ -92,6 +98,7 @@ function App() {
     const [subtitleExtensionInput, setSubtitleExtensionInput] = useState("")
     const [episodeNumberPattern, setEpisodeNumberPattern] = useState("")
     const [subtitleNumberPattern, setSubtitleNumberPattern] = useState("")
+    const [subtitleLanguage, setSubtitleLanguage] = useState("")
 
     const episodeExtension = extensionWithoutDot(episodeExtensionInput)
     const subtitleExtension = extensionWithoutDot(subtitleExtensionInput)
@@ -123,7 +130,7 @@ function App() {
         }
         const job = episodeFilesWithMatchingSubtitles.map(async ([episode, fileName]) => {
             const subtitleFileName = subtitleFilesByEpisode[episode];
-            const resultFileName = deriveSubtitleFileName(fileName, episodeExtension, subtitleExtension);
+            const resultFileName = deriveSubtitleFileName(fileName, episodeExtension, subtitleExtension, subtitleLanguage);
             if (subtitleFileName === resultFileName) {
                 return
             }
@@ -198,6 +205,7 @@ function App() {
                             ["Subtitle File Extension", subtitleExtensionInput, setSubtitleExtensionInput],
                             ["Episode Number Regex for Episode Files", episodeNumberPattern, setEpisodeNumberPattern],
                             ["Episode Number Regex for Subtitle Files", subtitleNumberPattern, setSubtitleNumberPattern],
+                            ["Subtitle Language", subtitleLanguage, setSubtitleLanguage],
                         ].map(([label, value, setValue]: any) => (
                             <TextField
                                 key={label}
@@ -228,7 +236,7 @@ function App() {
                                 <FileCard key={fileName}>
                                     <Typography>{episode}</Typography>
                                     <Typography>{fileName}</Typography>
-                                    <Typography>{episode && subtitleFilesByEpisode[episode] && deriveSubtitleFileName(fileName, episodeExtension, subtitleExtension)}</Typography>
+                                    <Typography>{episode && subtitleFilesByEpisode[episode] && deriveSubtitleFileName(fileName, episodeExtension, subtitleExtension, subtitleLanguage)}</Typography>
                                 </FileCard>
                             ))}
                     </Paper>
