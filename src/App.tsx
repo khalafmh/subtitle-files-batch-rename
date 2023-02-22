@@ -28,7 +28,8 @@ const styles = {
         display: "flex",
         flexDirection: "column",
         gap: "20px",
-        p: "10px",
+        py: "20px",
+        px: "10px",
         alignSelf: "center",
         width: "100%",
         maxWidth: "900px",
@@ -38,9 +39,8 @@ const styles = {
         alignItems: "center",
     },
     fileList: {
-        display: "flex",
-        flexDirection: "column",
-        alignItems: "start",
+        display: "grid",
+        gridTemplateColumns: "1fr",
         gap: "5px",
         p: "10px",
     },
@@ -165,7 +165,7 @@ function App() {
                 <CssBaseline/>
                 <AppBar variant="elevation" position="sticky">
                     <Toolbar variant="dense">
-                        Batch Subtitle Renamer
+                        Subtitle Renamer
                     </Toolbar>
                 </AppBar>
                 <Box sx={styles.body}>
@@ -173,12 +173,9 @@ function App() {
                         <TextField
                             variant="outlined"
                             fullWidth
-                            disabled
+                            focused={false}
                             label="Directory"
                             value={dirHandle?.name ?? ""}
-                        />
-                        <Button
-                            variant="outlined"
                             onClick={async () => {
                                 try {
                                     const result: FileSystemDirectoryHandle = await window.showDirectoryPicker()
@@ -193,9 +190,7 @@ function App() {
                                     alert("Directory selection canceled")
                                 }
                             }}
-                        >
-                            ...
-                        </Button>
+                        />
                     </Box>
                     <Typography>Directory Files</Typography>
                     <FileList files={files}/>
@@ -217,9 +212,23 @@ function App() {
                         ))
                     }
                     <Typography>Episode Files</Typography>
-                    <FileList files={episodeFiles.map(([episode, fileName]) => `${episode}: ${fileName}`)}/>
+                    <Paper sx={{...styles.fileList, gridTemplateColumns: "auto 1fr"}}>
+                        {episodeFiles.map(([episode, fileName]) => (
+                            <>
+                                <FileCard>{episode ?? "?"}</FileCard>
+                                <FileCard>{fileName}</FileCard>
+                            </>
+                        ))}
+                    </Paper>
                     <Typography>Subtitle Files</Typography>
-                    <FileList files={subtitleFiles.map(([episode, fileName]) => `${episode}: ${fileName}`)}/>
+                    <Paper sx={{...styles.fileList, gridTemplateColumns: "auto 1fr"}}>
+                        {subtitleFiles.map(([episode, fileName]) => (
+                            <>
+                                <FileCard>{episode ?? "?"}</FileCard>
+                                <FileCard>{fileName}</FileCard>
+                            </>
+                        ))}
+                    </Paper>
                     <Typography>Matching Files</Typography>
                     <Paper sx={styles.fileList}>
                         {episodeFilesWithMatchingSubtitles.map(([episode, fileName]) => (
@@ -233,12 +242,12 @@ function App() {
                     <Typography>Renamed Files</Typography>
                     <Paper sx={styles.fileList}>
                         {episodeFilesWithMatchingSubtitles.map(([episode, fileName]) => (
-                                <FileCard key={fileName}>
-                                    <Typography>{episode}</Typography>
-                                    <Typography>{fileName}</Typography>
-                                    <Typography>{episode && subtitleFilesByEpisode[episode] && deriveSubtitleFileName(fileName, episodeExtension, subtitleExtension, subtitleLanguage)}</Typography>
-                                </FileCard>
-                            ))}
+                            <FileCard key={fileName}>
+                                <Typography>{episode}</Typography>
+                                <Typography>{fileName}</Typography>
+                                <Typography>{episode && subtitleFilesByEpisode[episode] && deriveSubtitleFileName(fileName, episodeExtension, subtitleExtension, subtitleLanguage)}</Typography>
+                            </FileCard>
+                        ))}
                     </Paper>
                     <Button
                         variant="contained"
